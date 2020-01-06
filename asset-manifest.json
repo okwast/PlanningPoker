@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/PlanningPoker/static/css/main.0035b791.chunk.css",
+    "main.js": "/PlanningPoker/static/js/main.87b338e6.chunk.js",
+    "main.js.map": "/PlanningPoker/static/js/main.87b338e6.chunk.js.map",
+    "runtime-main.js": "/PlanningPoker/static/js/runtime-main.eac19345.js",
+    "runtime-main.js.map": "/PlanningPoker/static/js/runtime-main.eac19345.js.map",
+    "static/js/2.75d1328e.chunk.js": "/PlanningPoker/static/js/2.75d1328e.chunk.js",
+    "static/js/2.75d1328e.chunk.js.map": "/PlanningPoker/static/js/2.75d1328e.chunk.js.map",
+    "index.html": "/PlanningPoker/index.html",
+    "precache-manifest.345ab2701ce0ab19acff053af13b2b1f.js": "/PlanningPoker/precache-manifest.345ab2701ce0ab19acff053af13b2b1f.js",
+    "service-worker.js": "/PlanningPoker/service-worker.js",
+    "static/css/main.0035b791.chunk.css.map": "/PlanningPoker/static/css/main.0035b791.chunk.css.map"
+  }
+}
