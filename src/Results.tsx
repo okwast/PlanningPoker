@@ -9,7 +9,7 @@ interface IProps {
 
 export const Results = ({ ownId, users }: IProps) => {
   const numberOfFinishedUsers = Object.keys(users).filter(
-    key => !!users[key] && !!users[key].value
+    key => !!users[key] && !!users[key].value,
   ).length;
   const totalNumberOfUsers = Object.keys(users).length;
   const disclose = numberOfFinishedUsers === totalNumberOfUsers;
@@ -31,7 +31,7 @@ export const Results = ({ ownId, users }: IProps) => {
 
   const extendedUsers = Object.keys(users).map(key => ({
     ...users[key],
-    key
+    key,
   }));
 
   const sortUsers = (
@@ -39,7 +39,7 @@ export const Results = ({ ownId, users }: IProps) => {
       key: string;
       name: string;
       value?: string | undefined;
-    }[]
+    }[],
   ) => {
     return users.sort((user1, user2) => {
       if (!user1.value) return -1;
@@ -81,7 +81,7 @@ export const Results = ({ ownId, users }: IProps) => {
                   wordWrap: 'break-word',
                   height: '1em',
                   lineHeight: '1em',
-                  overflow: 'hidden'
+                  overflow: 'hidden',
                 }}
               >
                 {extendedSortedUsers.name}
@@ -89,7 +89,7 @@ export const Results = ({ ownId, users }: IProps) => {
               <div
                 style={{
                   fontSize: 80,
-                  color: disclose && (isMin || isMax) ? 'red' : 'black'
+                  color: disclose && (isMin || isMax) ? 'red' : 'black',
                 }}
               >
                 {getValue(extendedSortedUsers.key)}
