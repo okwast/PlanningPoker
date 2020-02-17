@@ -36,6 +36,7 @@ interface IProps {
 
 const App: React.FC<IProps> = ({ room = 'default' }: IProps) => {
   const [loading, setLoading] = useState(true);
+  const [audioPlayed, setAudioPlayed] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAdminCheckbox, setShowAdminCheckbox] = useState(true);
   const [users, setUsers] = useState<Users>({
@@ -44,6 +45,12 @@ const App: React.FC<IProps> = ({ room = 'default' }: IProps) => {
       value: undefined
     }
   });
+
+  const [audio] = useState(
+    new Audio(
+      'https://raw.githubusercontent.com/redbluenat/PlanningPoker/feature/sound-effect-for-same-points/src/wow.mp3'
+    ) // should be update with a repo link after merge
+  );
 
   const { name, value } = users[ownId];
 
@@ -71,7 +78,8 @@ const App: React.FC<IProps> = ({ room = 'default' }: IProps) => {
     setData(name, value);
   };
 
-  const reset = () => {
+  const reset = useCallback(() => {
+    audio.pause();
     setUsers(users =>
       _(users)
         .toPairs()
@@ -83,7 +91,8 @@ const App: React.FC<IProps> = ({ room = 'default' }: IProps) => {
           {}
         )
     );
-  };
+    setAudioPlayed(false);
+  }, [audio]);
 
   const onAdminSet = useCallback(() => {
     if (!isAdmin) {
@@ -182,7 +191,29 @@ const App: React.FC<IProps> = ({ room = 'default' }: IProps) => {
     };
 
     socket.onclose = event => {};
-  }, [name, socket, users, value]);
+  }, [name, reset, socket, users, value]);
+
+  useEffect(() => {
+    if (!audioPlayed) {
+      const userArray = _.values(users);
+      const userPoint = userArray[0].value;
+      if (userPoint && userArray.length > 1) {
+        const everybodySetPoint = _.every(userArray, user => {
+          return user.value !== undefined;
+        });
+        if (everybodySetPoint) {
+          const everybodyHavingSamePoint = _.every(userArray, user => {
+            return user.value === userPoint;
+          });
+
+          if (everybodyHavingSamePoint) {
+            audio.play();
+          }
+          setAudioPlayed(true);
+        }
+      }
+    }
+  }, [audio, audioPlayed, users]);
 
   if (loading) return <header>Loading ...</header>;
 
